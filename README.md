@@ -1,6 +1,6 @@
 # Floatplane API Specification
 
-Visit the pre-generated documentation, trimmed OpenAPI spec, and Postman collection at https://jman012.github.io/FloatplaneAPIDocs.
+Visit the pre-generated documentation, trimmed OpenAPI spec, and Postman collection at https://jamamp.github.io/FloatplaneAPIDocs/.
 
 Visit Floatplane at https://www.floatplane.com.
 
@@ -18,7 +18,7 @@ The main purpose of this repository is to enable automatic generation of documen
 
 ## OpenAPI/AsyncAPI & Code Generation
 
-The Floatplane API specification can be used to automatically generate client code of the Floatplane API in most major programming languages. It is best advised to use the [trimmed version](https://jman012.github.io/FloatplaneAPIDocs/floatplane-openapi-specification-trimmed.json) of the REST API to only generate the endpoints that have been thoroughly documented. Various generators exist for different use cases. 
+The Floatplane API specification can be used to automatically generate client code of the Floatplane API in most major programming languages. It is best advised to use the [trimmed version](https://jamamp.github.io/FloatplaneAPIDocs/floatplane-openapi-specification-trimmed.json) of the REST API to only generate the endpoints that have been thoroughly documented. Various generators exist for different use cases. 
 
 A notable open-source generator is [OpenAPI Generator](https://openapi-generator.tech/docs/generators) which supports 38 different languages, along with variations for different networking libraries in some languages. It additionally includes many configurations when generating clients. For AsyncAPI, the [AsyncAPI Generator](https://github.com/asyncapi/generator) is recommended.
 
@@ -36,7 +36,7 @@ ag -o FloatplaneChatAPI floatplane-asyncapi-chat-specification.json @asyncapi/no
 
 ## OpenAPI/AsyncAPI & Documentation Generation
 
-The API specifications can also be used to generate documentation. Pre-generated renders of the documentation for this repository are available at https://jman012.github.io/FloatplaneAPIDocs. There are a variety of renders available, including:
+The API specifications can also be used to generate documentation. Pre-generated renders of the documentation for this repository are available at https://jamamp.github.io/FloatplaneAPIDocs. There are a variety of renders available, including:
 - Swagger UI - https://github.com/swagger-api/swagger-ui
 - Redoc - https://redoc.ly/redoc
 - ReSlate & Widdershins - https://github.com/Mermade/reslate - https://github.com/Mermade/widdershins
@@ -61,7 +61,7 @@ ag -o Docs/AsyncAPIChat floatplane-asyncapi-chat-specification.json @asyncapi/ht
 
 ### Documentation Generation
 
-In order to generate all of the documentation available at https://jman012.github.io/FloatplaneAPIDocs automatically when testing changes to the OpenAPI file,
+In order to generate all of the documentation available at https://jamamp.github.io/FloatplaneAPIDocs automatically when testing changes to the OpenAPI file,
 1. Clone this repository
 2. Run `npm install`
 	1. This will install all of the necessary tooling

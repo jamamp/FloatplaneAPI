@@ -2,14 +2,14 @@
 	"json.schemas": [
 		{
 			"fileMatch": [
-				"/floatplane-openapi-specification.json"
+				"/src/floatplane-openapi-specification.json"
 			],
 			"url": "https://spec.openapis.org/oas/3.0/schema/2021-09-28"
 		},
 		{
 			"fileMatch": [
-				"/floatplane-asyncapi-chat-specification.json",
-				"/floatplane-asyncapi-frontend-specification.json"
+				"/src/floatplane-asyncapi-chat-specification.json",
+				"/src/floatplane-asyncapi-frontend-specification.json"
 			],
 			"url": "https://raw.githubusercontent.com/asyncapi/spec-json-schemas/master/schemas/2.6.0.json"
 		}

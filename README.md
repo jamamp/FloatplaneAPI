@@ -63,12 +63,12 @@ ag -o Docs/AsyncAPIChat floatplane-asyncapi-chat-specification.json @asyncapi/ht
 
 In order to generate all of the documentation available at https://jamamp.github.io/FloatplaneAPIDocs automatically when testing changes to the OpenAPI file,
 1. Clone this repository
-2. Run `npm install`
+2. Run `pnpm install`
 	1. This will install all of the necessary tooling
 	2. The OpenAPI Generator tooling requires Java to be installed, but will fail silently if it is not.
 	3. Note that for AsyncAPI, it depends on installing `puppeteer`. If working on an M1 Apple device, you may run into issues with this dependency. Following [this article](https://linguinecode.com/post/how-to-fix-m1-mac-puppeteer-chromium-arm64-bug) may help.
 3. Make changes as necessary to `floatplane-openapi-specification.json` or the AsyncAPI specification files
-4. Run `npm run docs-all`. This will:
+4. Run `make docs-all`. This will:
 	1. Trim the spec into `floatplane-openapi-specification-trimmed.json`
 	2. Generate documentation for the trimmed spec into the `/Docs` folder
 	3. Generate documentation for the full spec into the `/Docs` folder
@@ -104,7 +104,7 @@ The file `fp-frontend-version.txt` is a collection of recent version changes tha
 
 ### Integration Testing
 
-After making changes to the `floatplane-openapi-specification.json`, run `npm run test` in order to run integration tests with the Floatplane API. This ensures that the specification and its models are aligned with the API correctly.
+After making changes to the `floatplane-openapi-specification.json`, run `make test` in order to run integration tests with the Floatplane API. This ensures that the specification and its models are aligned with the API correctly.
 
 Integration test run requirements:
 - The environment variable "sails.sid" needs to be set to the value of the `sails.sid` HTTP Cookie for authentication in order for integration tests to run.

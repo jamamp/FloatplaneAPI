@@ -4,16 +4,18 @@
   "description": "Floatplane API Specification",
   "main": "floatplane-openapi-specification.json",
   "devDependencies": {
-    "@asyncapi/generator": "^1.10.10",
-    "@asyncapi/html-template": "^0.28.3",
-    "@openapitools/openapi-generator-cli": "^2.5.2",
-    "@redocly/cli": "^1.0.0",
+    "@asyncapi/generator": "^1.17.25",
+    "@asyncapi/html-template": "^0.28.4",
+    "@openapitools/openapi-generator-cli": "^2.20.2",
+    "@redocly/cli": "^1.34.3",
     "json2yaml": "^1.1.0",
     "openapi-to-postmanv2": "^2.14.1",
     "reslate": "3.0.0-5",
     "widdershins": "4.0.1"
   },
-  "scripts": {},
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Jman012/FloatplaneAPI.git"

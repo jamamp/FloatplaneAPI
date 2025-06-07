@@ -61,7 +61,7 @@ class TestFPAPIFlow():
 		response = self.getValidateAndAssert("/api/v3/creator/list")
 		self.creatorIds.update([creator["id"] for creator in response.json()])
 		self.creatorUrlNames.update([creator["urlname"] for creator in response.json()])
-		self.creatorOwnerIds.update([creator["owner"] for creator in response.json()])
+		self.creatorOwnerIds.update([creator["owner"]["id"] for creator in response.json()])
 		self.subscribedLivestreamIds.update([creator["liveStream"]["id"] for creator in response.json() if creator["id"] in self.subscribedCreatorIds])
 
 	@pytest.mark.dependency()
@@ -288,10 +288,6 @@ class TestFPAPIFlow():
 		print()
 		print("V3 Get User Notification List")
 		response = self.getValidateAndAssert("/api/v3/user/notification/list")
-
-		print()
-		print("V3 Get External Links")
-		response = self.getValidateAndAssert("/api/v3/user/links", params={"id": id})
 
 		print()
 		print("V3 Get External Activity")

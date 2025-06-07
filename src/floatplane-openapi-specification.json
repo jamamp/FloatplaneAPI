@@ -929,7 +929,7 @@
 						"nullable": true
 					},
 					"totalIncome": {
-						"type": "integer",
+						"type": "number",
 						"description": "The total amount of monthly income for this creator. This field tends to always be $0 for regular users.",
 						"nullable": true
 					},
@@ -1445,6 +1445,47 @@
 								"height",
 								"label",
 								"order"
+							]
+						}
+					},
+					"textTracks": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "string",
+									"description": "Text track identifier."
+								},
+								"src": {
+									"type": "string",
+									"format": "url",
+									"description": "URL to a text track file, usually .vtt files."
+								},
+								"kind": {
+									"type": "string",
+									"description": "Usually 'caption'."
+								},
+								"language": {
+									"type": "string",
+									"description": "Language code, e.g. 'en'."
+								},
+								"generated": {
+									"type": "boolean",
+									"description": "Whether the text track has been generated."
+								},
+								"processing": {
+									"type": "boolean",
+									"description": "Whether the text track is processing."
+								}
+							},
+							"required": [
+								"id",
+								"src",
+								"kind",
+								"language",
+								"generated",
+								"processing"
 							]
 						}
 					}
@@ -2039,26 +2080,19 @@
 						"type": "string"
 					},
 					"owner": {
-						"oneOf": [
-							{
+						"type": "object",
+						"additionalProperties": false,
+						"properties": {
+							"id": {
 								"type": "string"
 							},
-							{
-								"type": "object",
-								"additionalProperties": false,
-								"properties": {
-									"id": {
-										"type": "string"
-									},
-									"username": {
-										"type": "string"
-									}
-								},
-								"required": [
-									"id",
-									"username"
-								]
+							"username": {
+								"type": "string"
 							}
+						},
+						"required": [
+							"id",
+							"username"
 						]
 					},
 					"title": {
@@ -2144,7 +2178,8 @@
 						}
 					},
 					"card": {
-						"$ref": "#/components/schemas/ImageModel"
+						"$ref": "#/components/schemas/ImageModel",
+						"nullable": true
 					}
 				},
 				"required": [
@@ -2524,7 +2559,6 @@
 					"title",
 					"description",
 					"price",
-					"priceYearly",
 					"currency",
 					"logo",
 					"interval",
@@ -3269,7 +3303,8 @@
 						"type": "string"
 					},
 					"paymentCancelled": {
-						"type": "boolean"
+						"type": "boolean",
+						"nullable": true
 					},
 					"plan": {
 						"$ref": "#/components/schemas/SubscriptionPlanModel"
@@ -14581,86 +14616,6 @@
 				}
 			}
 		},
-		"/api/v2/user/links": {
-			"get": {
-				"deprecated": true,
-				"operationId": "getExternalLinksV2",
-				"summary": "Get External Links",
-				"description": "TODO - Not used in Floatplane code.",
-				"tags": [
-					"UserV2"
-				],
-				"parameters": [],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {},
-								"example": {}
-							}
-						}
-					},
-					"400": {
-						"$ref": "#/components/responses/400BadRequest"
-					},
-					"401": {
-						"$ref": "#/components/responses/401Unauthenticated"
-					},
-					"403": {
-						"$ref": "#/components/responses/403Forbidden"
-					},
-					"404": {
-						"$ref": "#/components/responses/404NotFound"
-					},
-					"429": {
-						"$ref": "#/components/responses/429TooManyRequests"
-					},
-					"default": {
-						"$ref": "#/components/responses/Unexpected"
-					}
-				}
-			},
-			"post": {
-				"deprecated": true,
-				"operationId": "updateExternalLinksV2",
-				"summary": "Update External Links",
-				"description": "TODO - Not used in Floatplane code.",
-				"tags": [
-					"UserV2"
-				],
-				"parameters": [],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {},
-								"example": {}
-							}
-						}
-					},
-					"400": {
-						"$ref": "#/components/responses/400BadRequest"
-					},
-					"401": {
-						"$ref": "#/components/responses/401Unauthenticated"
-					},
-					"403": {
-						"$ref": "#/components/responses/403Forbidden"
-					},
-					"404": {
-						"$ref": "#/components/responses/404NotFound"
-					},
-					"429": {
-						"$ref": "#/components/responses/429TooManyRequests"
-					},
-					"default": {
-						"$ref": "#/components/responses/Unexpected"
-					}
-				}
-			}
-		},
 		"/api/v2/user/administrator": {
 			"get": {
 				"operationId": "getAdministrator",
@@ -15158,105 +15113,6 @@
 									],
 									"visibility": "public"
 								}
-							}
-						}
-					},
-					"400": {
-						"$ref": "#/components/responses/400BadRequest"
-					},
-					"401": {
-						"$ref": "#/components/responses/401Unauthenticated"
-					},
-					"403": {
-						"$ref": "#/components/responses/403Forbidden"
-					},
-					"404": {
-						"$ref": "#/components/responses/404NotFound"
-					},
-					"429": {
-						"$ref": "#/components/responses/429TooManyRequests"
-					},
-					"default": {
-						"$ref": "#/components/responses/Unexpected"
-					}
-				}
-			}
-		},
-		"/api/v3/user/links": {
-			"get": {
-				"operationId": "getExternalLinksV3",
-				"summary": "Get External Links",
-				"description": "Retrieve configured social media links from a user's profile.",
-				"tags": [
-					"UserV3"
-				],
-				"parameters": [
-					{
-						"in": "query",
-						"name": "id",
-						"schema": {
-							"type": "string"
-						},
-						"required": true,
-						"description": "The GUID of the user being searched."
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK - User links returned",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/UserLinksV3Response"
-								},
-								"example": {
-									"twitch": {
-										"url": "https://twitch.tv/myusername",
-										"type": {
-											"name": "twitch",
-											"displayName": "Twitch",
-											"hostName": "twitch.tv"
-										}
-									}
-								}
-							}
-						}
-					},
-					"400": {
-						"$ref": "#/components/responses/400BadRequest"
-					},
-					"401": {
-						"$ref": "#/components/responses/401Unauthenticated"
-					},
-					"403": {
-						"$ref": "#/components/responses/403Forbidden"
-					},
-					"404": {
-						"$ref": "#/components/responses/404NotFound"
-					},
-					"429": {
-						"$ref": "#/components/responses/429TooManyRequests"
-					},
-					"default": {
-						"$ref": "#/components/responses/Unexpected"
-					}
-				}
-			},
-			"post": {
-				"operationId": "updateExternalLinksV3",
-				"summary": "Update External Links",
-				"description": "TODO",
-				"tags": [
-					"UserV3"
-				],
-				"parameters": [],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {},
-								"example": {}
 							}
 						}
 					},
@@ -21438,6 +21294,16 @@
 											"height": 720,
 											"label": "720p",
 											"order": 2
+										}
+									],
+									"textTracks": [
+										{
+											"id": "6823ca1cb3c97e3f8cefe6bb",
+											"src": "https://941d59f1900d0a09025413971374845d.r2.cloudflarestorage.com/prod-texttrack/text_tracks/BX3VEUGz2v/AQsb2my1nC6x6XX.vtt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=848bccaff51d5141475de2d2a180f979%2F20250607%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20250607T191449Z&X-Amz-Expires=900&X-Amz-Signature=4787e98e0d22cd06aec5a0d76fa6829138a95582e4d831964004471ff48fb1c1&X-Amz-SignedHeaders=host&response-expires=Sat%2C%2007%20Jun%202025%2019%3A14%3A50%20GMT&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+											"kind": "captions",
+											"language": "en",
+											"generated": false,
+											"processing": false
 										}
 									]
 								}
